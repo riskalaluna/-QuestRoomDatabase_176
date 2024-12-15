@@ -1,6 +1,43 @@
 package com.example.praktikum8.ui.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.example.praktikum8.data.entity.Mahasiswa
+import com.example.praktikum8.repository.RepositoryMhs
+import com.example.praktikum8.ui.navigation.DestinasiDetail
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+
+class DetailMhsViewModel(
+    savedStateHandle: SavedStateHandle,
+    private val repositoryMhs: RepositoryMhs,
+) : ViewModel() {
+    private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
+
+    val detailUiState: StateFlow<DetailUiState> = repositoryMhs.getMhs(_nim)
+        .filterNotNull()
+        .map {
+            DetailUiState(
+                detailUiEvent = it.toDetailUiEvent(),
+                isLoading = false,
+            )
+        }
+        .onStart {
+            emit(DetailUiState(isLoading = true))
+            delay(600)
+        }
+        .catch {
+            emit(
+                DetailUiState(
+                    isLoading = false,
+                    isError = true,
+                    errorMessage = it.message ?: "Terjadi Kesalahan",
+                )
+            )
+        }
+        .statein
+}
 
 
 //data class untuk menampung data yang akan ditampilkan di UI
