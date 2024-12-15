@@ -48,6 +48,18 @@ fun CardMhs(
                     fontSize = 20.sp
                 )
             }
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mhs.nim,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            }
 
         }
     }
