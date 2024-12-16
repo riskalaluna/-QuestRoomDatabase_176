@@ -17,7 +17,10 @@ import com.example.praktikum8.ui.viewmodel.UpdateMhsViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.praktikum8.ui.custumwidget.CstTopAppBar
 import com.example.praktikum8.ui.viewmodel.PenyediaViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun UpdateMhsView(
@@ -64,7 +67,25 @@ fun UpdateMhsView(
                 .padding(padding)
                 .padding(16.dp)
         ){
-        }
 
+            //isibody
+            InsertBodyMhs(
+                uiState = uiState,
+                onValueChange = { updatedEvent ->
+                    viewModel.updateState(updatedEvent) //update state di viewmodel
+                },
+                onClick = {
+                    coroutineScope.launch {
+                        if (viewModel.validateFields() ) {
+                            viewModel.updateState()
+                            delay(600)
+                            withContext(Dispatchers.Main) {
+                                onNavigate() //navigasi di main thread
+                            }
+                        }
+                    }
+                }
+            )
+        }
     }
 }
