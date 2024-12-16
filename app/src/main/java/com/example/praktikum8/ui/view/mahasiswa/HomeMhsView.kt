@@ -79,8 +79,21 @@ fun BodyHomeMhsView(
                 )
             }
         }
+
+        else -> {
+            //menampilkan daftar mahasiswa
+            ListMahasiswa(
+                listMhs = homeUiState.listMhs,
+                onClick = {
+                    onClick(it)
+                    println(it)
+                },
+                modifier = modifier
+            )
+        }
     }
 }
+//fun onClick(it: String) { }
 
 @Composable
 fun ListMahasiswa(
