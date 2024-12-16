@@ -49,6 +49,7 @@ import com.example.praktikum8.ui.viewmodel.PenyediaViewModel
 fun HomeMhsView(
     viewModel: HomeMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onAddMhs: () -> Unit = { },
+    onDetailClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
     Scaffold (

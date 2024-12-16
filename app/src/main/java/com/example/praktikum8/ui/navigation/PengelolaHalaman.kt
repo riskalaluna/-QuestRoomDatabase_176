@@ -71,7 +71,7 @@ fun PengelolaHalaman(
                         navController.popBackStack()
                     },
                     onEditClick = {
-                        navController.navigate("${DestinasiEdit.route}/$it")
+                        navController.navigate("${DestinasiUpdate.route}/$it")
                     },
                     modifier = modifier,
                     onDeleteClick = {
@@ -82,9 +82,9 @@ fun PengelolaHalaman(
         }
 
         composable(
-            DestinasiEdit.routesWithArg,
+            DestinasiUpdate.routesWithArg,
             arguments = listOf(
-                navArgument(DestinasiEdit.NIM) {
+                navArgument(DestinasiUpdate.NIM) {
                     type = NavType.StringType
                 }
             )
