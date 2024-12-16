@@ -115,7 +115,6 @@ fun InsertBodyMhs(
         Button(
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
-
             ) {
             Text("Simpan")
         }
