@@ -91,7 +91,7 @@ fun HomeMhsView(
 @Composable
 fun BodyHomeMhsView(
     homeUiState: HomeUiState,
-    onClick: () -> Unit = { },
+    onClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
 
@@ -146,7 +146,6 @@ fun BodyHomeMhsView(
         }
     }
 }
-//fun onClick(it: String) { }
 
 @Composable
 fun ListMahasiswa(
