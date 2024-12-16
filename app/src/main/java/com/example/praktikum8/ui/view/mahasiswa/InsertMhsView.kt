@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.praktikum8.ui.custumwidget.CstTopAppBar
 import com.example.praktikum8.ui.navigation.AlamatNavigasi
@@ -109,8 +108,7 @@ fun InsertBodyMhs(
         FormMahasiswa(
             mahasiswaEvent = uiState.mahasiswaEvent,
             onValueChange = onValueChange,
-            errorState = uiState.isEntryValid,
-            modifier = Modifier.fillMaxWidth()
+            errorState = uiState.isEntryValid
         )
         Button(
             onClick = onClick,
