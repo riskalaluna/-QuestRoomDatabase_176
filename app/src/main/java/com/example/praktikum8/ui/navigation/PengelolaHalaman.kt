@@ -5,13 +5,17 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.praktikum8.ui.view.mahasiswa.DestinasiInsert
 import com.example.praktikum8.ui.view.mahasiswa.DestinasiInsert.route
+import com.example.praktikum8.ui.view.mahasiswa.DetailMhsView
 import com.example.praktikum8.ui.view.mahasiswa.HomeMhsView
 import com.example.praktikum8.ui.view.mahasiswa.InserMhsView
+import com.example.praktikum8.ui.view.mahasiswa.UpdateMhsView
 import com.example.praktikum8.ui.viewmodel.HomeUiState
 
 @Composable
@@ -48,6 +52,51 @@ fun PengelolaHalaman(
                     navController.popBackStack()
                 },
                 modifier = modifier,
+            )
+        }
+
+        composable(
+            DestinasiDetail.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.NIM) {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val nim = it.arguments?.getString(DestinasiDetail.NIM)
+
+            nim?.let { nim ->
+                DetailMhsView(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onEditClick = {
+                        navController.navigate("${DestinasiEdit.route}/$it")
+                    },
+                    modifier = modifier,
+                    onDeleteClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
+
+        composable(
+            DestinasiEdit.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiEdit.NIM) {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+
+            UpdateMhsView(
+                onBack = {
+                         navController.popBackStack()
+                }, onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier
             )
         }
 
